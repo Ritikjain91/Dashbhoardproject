@@ -1,4 +1,4 @@
-// src/store/store.js
+
 import { createStore } from 'redux';
 import todoReducer from './todoReducer';
 
