@@ -12,13 +12,12 @@ function RootLayout() {
     <Container>
     <Box display="flex" flexDirection="column" minHeight="100vh">
       <CssBaseline /> 
-      <Box>
+    
       <Box>
         <Header />
-        </Box>
-        <Box>
+      
         <NavBar />
-        </Box>
+        
        
         </Box>
      

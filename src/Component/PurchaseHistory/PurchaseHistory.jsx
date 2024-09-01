@@ -7,21 +7,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
-import { BiExpand } from "react-icons/bi";
-import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
-function createData(courseName, dateTime, status, score, action) {
-  return { courseName, dateTime, status, score, action };
-}
-const iconStyle = { color: '#FFD700', fontSize: '24px',cursor:'pointer' }; 
-const sample = [
-  createData('Python for Beginners', '2023-01-15 10:00 AM', 'pass', 150, <BiExpand style={iconStyle} />),
-  createData('Advanced Python', '2023-02-20 02:30 PM', 'pass', 220, <BiExpand style={iconStyle} />),
-  createData('Python Data Science', '2023-03-10 11:45 AM', 'fail', 175, <BiExpand style={iconStyle} />),
-  createData('Python Web Development', '2023-04-05 09:15 AM', 'pass', 190, <BiExpand style={iconStyle} />),
-  createData('Python Machine Learning', '2023-05-12 03:00 PM', 'pass', 200, <BiExpand style={iconStyle} />),
 
+function createData(courseName, dateTime, amount, paymentMethod) {
+  return { courseName, dateTime, amount, paymentMethod };
+}
+
+
+const sample = [
+  createData('Python for Beginners', '2023-01-15 10:00 AM', '₹500', 'Credit Card'),
+  createData('Advanced Python', '2023-02-20 02:30 PM', '₹1500', 'Debit Card'),
+  createData('Python Data Science', '2023-03-10 11:45 AM', '₹2000', 'UPI'),
+  createData('Python Web Development', '2023-04-05 09:15 AM', '₹2500', 'Net Banking'),
+  createData('Python Machine Learning', '2023-05-12 03:00 PM', '₹3000', 'Cash'),
 ];
 
 const columns = [
@@ -37,17 +36,16 @@ const columns = [
   },
   {
     width: 100,
-    label: 'Status',
-    dataKey: 'status',
+    label: 'Amount',
+    dataKey: 'amount',
   },
   {
-    width: 100,
-    label: 'Score',
-    dataKey: 'score',
-    numeric: true,
+    width: 200,
+    label: 'Payment Method',
+    dataKey: 'paymentMethod',
   },
   {
-    width: 80,
+    width: 150,
     label: 'Action',
     dataKey: 'action',
   },
@@ -96,15 +94,15 @@ function rowContent(_index, row) {
           key={column.dataKey}
           align={column.numeric ? 'right' : 'left'}
         >
-          {column.dataKey === 'status' ? (
+          {column.dataKey === 'action' ? (
             <Button
               variant="contained"
               style={{
-                backgroundColor: row.status === 'black',
-                color: 'white',
+                color: 'black',
+                cursor: 'pointer',
               }}
             >
-              {row.status}
+              Receipt
             </Button>
           ) : (
             row[column.dataKey]
@@ -116,7 +114,6 @@ function rowContent(_index, row) {
 }
 
 export default function ReactVirtualizedTable() {
-  const theme = useTheme();
   return (
     <Paper style={{ height: 400, width: '100%' }}>
       <TableVirtuoso

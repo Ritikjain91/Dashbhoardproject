@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';  // Import NavLink
+import { NavLink } from 'react-router-dom';  
 
 const pages = ['My Course', 'Results', 'Purchase History', 'Profile'];
 
@@ -35,7 +35,7 @@ function NavBar() {
         backgroundColor: 'white', 
         color: 'black', 
         borderRadius: '10px',
-        margin: '10px',
+        my: '10px',
       }}
     >
       <Container maxWidth="xl">
