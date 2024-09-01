@@ -4,7 +4,7 @@ import { Box, Container, CssBaseline } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import Header from '../Header/Header.jsx';
 
 
 function RootLayout() {
