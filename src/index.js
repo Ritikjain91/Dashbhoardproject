@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -212,19 +212,5 @@ root.render(
     <CssBaseline />
     <App />
   </ThemeProvider>
-=======
-// src/index.js
-import React from 'react';
-import ReactDOM from 'react-dom/client'; 
-import { Provider } from 'react-redux';
-import store from './Store/Store';
-import App from './App';
-import './index.css'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
->>>>>>> 1d98e387a887fb6faa4ce6c1c4179c5ab36e82d1
 );
