@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Card, CardContent, CardMedia, Typography, LinearProgress, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Grid, Card, CardContent, CardMedia, Typography, LinearProgress, Box, Pagination, Stack } from '@mui/material';
 
 const CourseCard = ({ title, instructors, progress }) => {
   return (
@@ -29,6 +29,9 @@ const CourseCard = ({ title, instructors, progress }) => {
 };
 
 const App = () => {
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 8; 
+
   const courses = [
     {
       title: "Complete Digital Marketing Course: Zero to One",
@@ -70,16 +73,81 @@ const App = () => {
       instructors: "John Doe, Angela Yu",
       progress: 85,
     },
-    
-   
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 85,
+    },
   ];
 
+  const count = Math.ceil(courses.length / itemsPerPage);
+  const paginatedCourses = courses.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
+  const handleChange = ( value) => {
+    setPage(value);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, p: 2 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={3}>
-        {courses.map((course, index) => (
+        {paginatedCourses.map((course, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-            <CourseCard 
+            <CourseCard
               title={course.title}
               instructors={course.instructors}
               progress={course.progress}
@@ -87,7 +155,11 @@ const App = () => {
           </Grid>
         ))}
       </Grid>
-  
+      <Box display="flex" justifyContent="center" sx={{ my: 4 }}>
+        <Stack spacing={2}>
+          <Pagination count={count} page={page} onChange={handleChange} />
+        </Stack>
+      </Box>
     </Box>
   );
 };

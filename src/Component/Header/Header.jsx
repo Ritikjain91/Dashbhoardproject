@@ -10,10 +10,15 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 const HeaderContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1.5),
   position: 'relative',
-  height: '168px',
   boxShadow: '0 8px 8px -4px rgba(0, 0, 0, 0.2)',
   borderRadius: '16px',
   backgroundColor: 'white',
+
+  
+  height: '168px', 
+  [theme.breakpoints.down('sm')]: {
+    height: '120px', 
+  },
 }));
 
 const StyledImage1 = styled('img')(({ theme }) => ({
@@ -38,7 +43,7 @@ const Header = () => {
   const matches = useMediaQuery('(max-width:600px)');
 
   return (
-    <HeaderContainer sx={{ mt: 12 }}>
+    <HeaderContainer sx={{ mt: 5 }}>
       <Grid container direction="row" alignItems="center" justifyContent="space-between">
         <Grid item>
           <Box sx={{ ml: matches ? 2 : 15 }}>
