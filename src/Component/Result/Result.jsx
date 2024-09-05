@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BiExpand } from "react-icons/bi";
-import { Box, Typography, Paper, Button, useMediaQuery } from '@mui/material';
+import { Box, Typography, Paper, Button, useMediaQuery, TextField } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -25,11 +25,11 @@ const sample = [
 ];
 
 const columns = [
-  { label: 'Course Name', dataKey: 'courseName', width: { sm: 150, md: 250, lg: 300 } },
-  { label: 'Date & Time', dataKey: 'dateTime', width: { sm: 120, md: 200, lg: 250 } },
-  { label: 'Status', dataKey: 'status', width: { sm: 80, md: 100, lg: 120 } },
-  { label: 'Score', dataKey: 'score', numeric: true, width: { sm: 80, md: 100, lg: 120 } },
-  { label: 'Action', dataKey: 'action', width: { sm: 60, md: 80, lg: 100 } },
+  { label: 'Course Name', dataKey: 'courseName', width: { sm: 130, md: 200, lg: 250 } },
+  { label: 'Date & Time', dataKey: 'dateTime', width: { sm: 110, md: 180, lg: 220 } },
+  { label: 'Status', dataKey: 'status', width: { sm: 70, md: 90, lg: 110 } },
+  { label: 'Score', dataKey: 'score', numeric: true, width: { sm: 70, md: 90, lg: 110 } },
+  { label: 'Action', dataKey: 'action', width: { sm: 50, md: 70, lg: 90 } },
 ];
 
 const rows = Array.from({ length: 200 }, (_, index) => {
@@ -39,7 +39,7 @@ const rows = Array.from({ length: 200 }, (_, index) => {
 
 function fixedHeaderContent() {
   return (
-    <TableRow>
+    <TableRow >
       {columns.map((column) => (
         <TableCell
           key={column.dataKey}
@@ -91,38 +91,71 @@ function rowContent(_index, row) {
   );
 }
 
-function MobileOnlyView() {
+function MobileOnlyView({ page, rowsPerPage, handleChangePage }) {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const [searchTerm, setSearchTerm] = React.useState('');
+  
+  const filteredRows = rows.filter(row => 
+    row.courseName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const paginatedRows = filteredRows.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+
   return (
-    <Paper style={{ height: '100vh', width: '100%', backgroundColor: 'white' }}> 
-      {rows.map((row, index) => (
+    <Paper style={{ width: '100%', backgroundColor: 'white' }}>
+      <Box 
+        padding={isMobile ? 1 : 2} 
+        sx={{ mx:1 }}
+      >
+        <TextField
+          fullWidth
+          variant="outlined"
+          placeholder="Search Courses"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          sx={{
+            '& .MuiInputBase-root': {
+              height: isMobile ? '32px' : '48px', 
+              fontSize: isMobile ? '12px' : '18px', 
+              width: '90%', 
+              marginLeft: '8px', 
+              marginRight: '8px', 
+            },
+          }}
+        />
+      </Box>
+      {paginatedRows.map((row, index) => (
         <Box
           key={index}
           sx={{
-            padding: '16px',
+            padding: isMobile ? '8px' : '16px',
+            marginTop: isMobile ? '8px' : '16px',
+            marginBottom: isMobile ? '8px' : '16px',
+            marginLeft: '8px', 
+            marginRight: '8px', 
             borderBottom: '1px solid #e0e0e0',
             display: 'flex',
             flexDirection: 'column',
-            gap: '8px',
-            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',  
-            marginBottom: '8px', 
-            borderRadius: '8px',  
-            backgroundColor: 'white', 
+            gap: '4px',
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)', 
+            borderRadius: '8px',
+            backgroundColor: 'white',
           }}
         >
           <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography variant="h6" fontWeight="bold">
+            <Typography variant="h6" fontWeight="bold" fontSize={isMobile ? '14px' : '18px'}>
               {row.courseName}
             </Typography>
             {row.action}
           </Box>
           <Box display="flex" alignItems="center" gap="4px">
             <HistoryToggleOffIcon style={{ color: 'gray' }} />
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="body2" color="textSecondary" fontSize={isMobile ? '12px' : '14px'}>
               {row.dateTime}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between" alignItems="center">
-            <Typography variant="body2">
+            <Typography variant="body2" fontSize={isMobile ? '10px' : '14px'}>
               Score: {row.score}
             </Typography>
             <Button
@@ -130,8 +163,8 @@ function MobileOnlyView() {
               style={{
                 backgroundColor: row.status === 'pass' ? 'green' : 'red',
                 color: 'white',
-                padding: '4px 12px',
-                fontSize: '12px',
+                padding: isMobile ? '1px 4px' : '4px 12px',
+                fontSize: isMobile ? '8px' : '12px',
               }}
             >
               {row.status.toUpperCase()}
@@ -139,6 +172,15 @@ function MobileOnlyView() {
           </Box>
         </Box>
       ))}
+      <Box display="flex" justifyContent="center" padding={isMobile ? 1 : 2}>
+        <Stack spacing={2}>
+          <Pagination
+            count={Math.ceil(filteredRows.length / rowsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+          />
+        </Stack>
+      </Box>
     </Paper>
   );
 }
@@ -148,15 +190,18 @@ export default function ResponsiveTable() {
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 10;
 
-  const handleChangePage = (event, value) => {
+  const handleChangePage = ( value) => {
     setPage(value);
   };
 
- 
   const paginatedRows = rows.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
   return isMobile ? (
-    <MobileOnlyView />
+    <MobileOnlyView 
+      page={page} 
+      rowsPerPage={rowsPerPage} 
+      handleChangePage={handleChangePage} 
+    />
   ) : (
     <Paper style={{ width: '100%' }}>
       <TableContainer component={Paper}>

@@ -3,7 +3,7 @@ import { Grid, Card, CardContent, CardMedia, Typography, LinearProgress, Box, Pa
 
 const CourseCard = ({ title, instructors, progress }) => {
   return (
-    <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3 }}>
+    <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3, mt:1 }}>
       <CardMedia
         component="img"
         height="140"
@@ -17,7 +17,7 @@ const CourseCard = ({ title, instructors, progress }) => {
         <Typography variant="body2" color="text.secondary">
           {instructors}
         </Typography>
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ mt: 5 }}>
           <LinearProgress variant="determinate" value={progress} />
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
             {progress}% Complete
@@ -30,7 +30,7 @@ const CourseCard = ({ title, instructors, progress }) => {
 
 const App = () => {
   const [page, setPage] = useState(1);
-  const itemsPerPage = 8; 
+  const itemsPerPage = 8;
 
   const courses = [
     {
@@ -41,67 +41,7 @@ const App = () => {
     {
       title: "Complete Digital Marketing Course: Zero to One",
       instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
+      progress: 65,
     },
     {
       title: "Complete Digital Marketing Course: Zero to One",
@@ -111,12 +51,7 @@ const App = () => {
     {
       title: "Complete Digital Marketing Course: Zero to One",
       instructors: "John Doe, Angela Yu",
-      progress: 85,
-    },
-    {
-      title: "Complete Digital Marketing Course: Zero to One",
-      instructors: "John Doe, Angela Yu",
-      progress: 85,
+      progress: 65,
     },
     {
       title: "Complete Digital Marketing Course: Zero to One",
@@ -126,13 +61,29 @@ const App = () => {
     {
       title: "Complete Digital Marketing Course: Zero to One",
       instructors: "John Doe, Angela Yu",
-      progress: 85,
+      progress: 65,
     },
     {
       title: "Complete Digital Marketing Course: Zero to One",
       instructors: "John Doe, Angela Yu",
-      progress: 85,
+      progress: 65,
     },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    
   ];
 
   const count = Math.ceil(courses.length / itemsPerPage);
@@ -143,10 +94,21 @@ const App = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      
+        minHeight: '100vh',
+        textAlign: 'center',
+        padding: 0,
+      }}
+    >
+      <Grid container spacing={3} justifyContent="center" alignItems="center">
         {paginatedCourses.map((course, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+          <Grid item xs={12} sm={8} md={6} lg={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
             <CourseCard
               title={course.title}
               instructors={course.instructors}
@@ -155,7 +117,7 @@ const App = () => {
           </Grid>
         ))}
       </Grid>
-      <Box display="flex" justifyContent="center" sx={{ my: 4 }}>
+      <Box sx={{ my: 5, display: 'flex', justifyContent: 'center' }}>
         <Stack spacing={2}>
           <Pagination count={count} page={page} onChange={handleChange} />
         </Stack>

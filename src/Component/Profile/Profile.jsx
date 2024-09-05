@@ -12,49 +12,53 @@ import {
 
 const Profile = () => {
   return (
-    <Box sx={{ Width: '1000px',   }}>
-      <Grid container spacing={4} >
-        <Grid item xs={12} md={4}  >
-          <Card direction={{sm:"row",xs:"columns"}}> 
-            <Grid container spacing={2} >
-              <Grid item xs={12} sm={4} md={12}>
-                <CardMedia
-                  component="img"
-                  image="https://via.placeholder.com/150"
-                  alt="Profile"
-                  sx={{
-                    borderRadius: '8px',
-                    width: { xs: '100%', md: '300px' },
-                    height: '165px',
-                    margin: { xs: '0 auto', md: '20px auto' },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={8} md={12}>
-                <CardContent sx={{ textAlign: { xs: 'center', md: 'center' } }}>
-                  <Typography variant="h5" component="div">
-                    Jose Herman
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    username-here
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    sx={{ marginTop: '15px' }}
-                  >
-                    Kimberly Light
-                    <br />
-                    Apt. 634
-                    <br />
-                    Buckinghamshire
-                  </Typography>
-                </CardContent>
-              </Grid>
-            </Grid>
+    <Box   sx={{
+      width: '100%',
+      ml: 5,
+      px: {lg:0,md:0, xs: 2, sm: 2 }, 
+      maxWidth: { xs: '99%', sm: '1000px', md: '100%', }, 
+      margin: { xs: 'auto', md: '0' },
+    }}
+  >
+      <Grid container spacing={1} direction={{ xs: 'column', sm: 'column', md: 'row' }}>
+        
+      
+        <Grid item xs={12} md={4}>
+          <Card sx={{ display: 'flex', flexDirection: { xs: 'row', md: 'column' } }}>
+            <CardMedia
+              component="img"
+              image="https://via.placeholder.com/150"
+              alt="Profile"
+              sx={{
+                borderRadius: '8px',
+                width: { xs: '100px', sm: '100px', md: '300px' },
+                height: { xs: '100px', sm: '100px', md: '165px' },
+                margin: { md: '20px auto', xs: '10px' },
+              }}
+            />
+            <CardContent sx={{ textAlign: { xs: 'left', md: 'center' } }}>
+              <Typography variant="h5" component="div">
+                Jose Herman
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                username-here
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                sx={{ marginTop: '15px' }}
+              >
+                Kimberly Light
+                <br />
+                Apt. 634
+                <br />
+                Buckinghamshire
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
 
+ 
         <Grid item xs={12} md={8}>
           <Card sx={{ mb: 2 }}>
             <CardContent>

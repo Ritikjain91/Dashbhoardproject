@@ -2,99 +2,38 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
+import Container from '@mui/material/Container'
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from 'react-router-dom';  
+import { NavLink } from 'react-router-dom';
 
 const pages = ['My Course', 'Results', 'Purchase History', 'Profile'];
 
 function NavBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleMenuItemClick = () => {
-    handleCloseNavMenu();
-  };
-
   return (
     <AppBar 
       position="static" 
       sx={{ 
-        backgroundColor: 'white', 
+        backgroundColor: { xs: 'transparent', md: 'white' },
         color: 'black', 
         borderRadius: '10px',
-        my: '10px',
+        my: {
+          lg: '4px',
+          sm: '1px', 
+        },
+        
+        boxShadow: { xs: 'none', lg: '0px 4px 12px rgba(0, 0, 0, 0.3)' }  
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ borderRadius: '10px' }}>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {pages.map((page) => (
-                <MenuItem 
-                  key={page} 
-                  onClick={handleMenuItemClick}
-                >
-                  <Typography 
-                    sx={{ textAlign: 'center' }} 
-                    component={NavLink} 
-                    to={`/${page.toLowerCase().replace(' ', '-')}`}
-                    style={({ isActive }) => ({
-                      color: isActive ? 'blue' : 'black',
-                      textDecoration: 'none',
-                    })}
-                  >
-                    {page}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
           
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+       
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'start' }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 component={NavLink}
                 to={`/${page.toLowerCase().replace(' ', '-')}`}
-                onClick={handleMenuItemClick}
                 sx={{ my: 2, color: 'black', display: 'block' }}
                 style={({ isActive }) => ({
                   color: isActive ? 'blue' : 'black',
@@ -105,6 +44,7 @@ function NavBar() {
               </Button>
             ))}
           </Box>
+          
         </Toolbar>
       </Container>
     </AppBar>

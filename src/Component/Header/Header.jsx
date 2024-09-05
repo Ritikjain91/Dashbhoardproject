@@ -14,10 +14,9 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   borderRadius: '16px',
   backgroundColor: 'white',
 
-  
-  height: '168px', 
+  height: '168px',
   [theme.breakpoints.down('sm')]: {
-    height: '120px', 
+    height: '150px',
   },
 }));
 
@@ -43,37 +42,37 @@ const Header = () => {
   const matches = useMediaQuery('(max-width:600px)');
 
   return (
-    <HeaderContainer sx={{ mt: 5 }}>
+    <HeaderContainer sx={{ mt: 5, mx: { lg: 0, sm: 2, xs: 2 } }}>
       <Grid container direction="row" alignItems="center" justifyContent="space-between">
         <Grid item>
-          <Box sx={{ ml: matches ? 2 : 15 }}>
+          <Box sx={{ ml: matches ? 4 : 15 }}>
             <Box>
-              <Typography 
-                variant="body2" 
-                sx={{ 
-                  mb: matches ? 2 : 15, 
-                  color: 'black', 
-                  fontWeight: 500, 
-                  fontSize: matches ? '0.75rem' : '1rem' 
+              <Typography
+                variant="body2"
+                sx={{
+                  mb: matches ? 2 : 15,
+                  color: 'black',
+                  fontWeight: 500,
+                  fontSize: matches ? '0.75rem' : '1rem',
                 }}
               >
                 September 4, 2024
               </Typography>
             </Box>
             <Box>
-              <Typography 
+              <Typography
                 variant={matches ? 'h6' : 'h4'}
-                sx={{ 
-                  fontSize: matches ? '1.5rem' : '2rem', 
+                sx={{
+                  fontSize: matches ? '1.5rem' : '2rem',
                 }}
               >
                 Welcome back, <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 500 }}>Jose Herman!</Box>
               </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: theme.palette.text.secondary, 
-                  fontSize: matches ? '0.875rem' : '1rem' 
+              <Typography
+                variant="body1"
+                sx={{
+                  color: theme.palette.text.secondary,
+                  fontSize: matches ? '0.875rem' : '1rem',
                 }}
               >
                 Unlock your potential and track your progress to success!
@@ -81,6 +80,7 @@ const Header = () => {
             </Box>
           </Box>
 
+          {/* Conditionally render images based on screen size */}
           {!matches && (
             <Grid container spacing={2}>
               <Grid item xs={12} sm={4}>
@@ -90,6 +90,14 @@ const Header = () => {
                 <StyledImage2 src={Picture3} alt="Header Image 2" />
               </Grid>
               <Grid item xs={12} sm={4}>
+                <StyledImage2 src={Picture4} alt="Header Image 2" />
+              </Grid>
+            </Grid>
+          )}
+
+          {matches && (
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
                 <StyledImage2 src={Picture4} alt="Header Image 2" />
               </Grid>
             </Grid>
