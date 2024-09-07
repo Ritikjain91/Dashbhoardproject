@@ -3,7 +3,7 @@ import { Grid, Card, CardContent, CardMedia, Typography, LinearProgress, Box, Pa
 
 const CourseCard = ({ title, instructors, progress }) => {
   return (
-    <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3, mt:1 }}>
+    <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3 }}>
       <CardMedia
         component="img"
         height="140"
@@ -83,13 +83,12 @@ const App = () => {
       instructors: "John Doe, Angela Yu",
       progress: 65,
     },
-    
   ];
 
   const count = Math.ceil(courses.length / itemsPerPage);
   const paginatedCourses = courses.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
-  const handleChange = ( value) => {
+  const handleChange = (event, value) => {
     setPage(value);
   };
 
@@ -100,7 +99,6 @@ const App = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-      
         minHeight: '100vh',
         textAlign: 'center',
         padding: 0,
@@ -108,7 +106,15 @@ const App = () => {
     >
       <Grid container spacing={3} justifyContent="center" alignItems="center">
         {paginatedCourses.map((course, index) => (
-          <Grid item xs={12} sm={8} md={6} lg={3} key={index} sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Grid
+            item
+            xs={12}          // 1 column for mobile screens
+            sm={6}           // 2 columns for small screens
+            md={6}           // 2 columns for tablet screens (md)
+            lg={3}           // 4 columns for large screens
+            key={index}
+            sx={{ display: 'flex', justifyContent: 'center' }}
+          >
             <CourseCard
               title={course.title}
               instructors={course.instructors}

@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField'; 
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -98,7 +99,7 @@ function fixedHeaderContent() {
           key={column.dataKey}
           variant="head"
           align={column.numeric ? 'right' : 'left'}
-          style={{ width: column.width }}
+          style={{ width: column.width, backgroundColor: 'white' }}
         >
           {column.label}
         </TableCell>
@@ -109,7 +110,7 @@ function fixedHeaderContent() {
 
 function MobileOnlyView({ paginatedRows, page, handleChangePage }) {
   return (
-    <Box sx={{ backgroundColor: 'white' }}>
+    <Box>
       {paginatedRows.map((row, index) => (
         <Box
           key={index}
@@ -182,15 +183,54 @@ export default function ResponsiveTable() {
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const [page, setPage] = React.useState(1);
+  const [searchTerm, setSearchTerm] = React.useState(''); 
+  const [filteredRows, setFilteredRows] = React.useState(rows); 
 
-  const handleChangePage = (newPage) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const paginatedRows = rows.slice((page - 1) * 10, page * 10);
+
+  const handleSearch = (event) => {
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+    const filtered = rows.filter((row) =>
+      row.courseName.toLowerCase().includes(value)
+    );
+    setFilteredRows(filtered);
+  };
+
+  const paginatedRows = filteredRows.slice((page - 1) * 10, page * 10);
 
   return (
     <React.Fragment>
+    
+      <Box sx={{ display: {
+    xl: 'none',
+    lg: 'none',
+    md: 'none',
+    sm: 'flex',
+  }, justifyContent: 'center' }}>
+        <TextField
+     
+        
+        fullWidth
+        variant="outlined"
+        placeholder="Search Courses"
+   
+          value={searchTerm}
+          onChange={handleSearch}
+          sx={{
+            '& .MuiInputBase-root': {
+              height: isMobile ? '32px' : '48px',
+              fontSize: isMobile ? '12px' : '18px',
+              width: '99%',
+            
+            },
+          }}
+        />
+      </Box>
+
       {isMobile ? (
         <MobileOnlyView paginatedRows={paginatedRows} page={page} handleChangePage={handleChangePage} />
       ) : (
@@ -210,7 +250,7 @@ export default function ResponsiveTable() {
           <Box display="flex" justifyContent="center" padding={2}>
             <Stack spacing={2}>
               <Pagination
-                count={Math.ceil(rows.length / 10)}
+                count={Math.ceil(filteredRows.length / 10)}
                 page={page}
                 onChange={handleChangePage}
               />

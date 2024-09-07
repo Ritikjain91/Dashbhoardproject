@@ -15,7 +15,10 @@ function createData(courseName, dateTime, status, score, action) {
   return { courseName, dateTime, status, score, action };
 }
 
-const iconStyle = { color: '#FFD700', fontSize: '24px', cursor: 'pointer' }; 
+
+const iconStyle = { color: '#FFD700', fontSize: '24px', cursor: 'pointer' };
+
+
 const sample = [
   createData('Python for Beginners', '2023-01-15 10:00 AM', 'pass', 150, <BiExpand style={iconStyle} />),
   createData('Advanced Python', '2023-02-20 02:30 PM', 'pass', 220, <BiExpand style={iconStyle} />),
@@ -23,6 +26,7 @@ const sample = [
   createData('Python Web Development', '2023-04-05 09:15 AM', 'pass', 190, <BiExpand style={iconStyle} />),
   createData('Python Machine Learning', '2023-05-12 03:00 PM', 'pass', 200, <BiExpand style={iconStyle} />),
 ];
+
 
 const columns = [
   { label: 'Course Name', dataKey: 'courseName', width: { sm: 130, md: 200, lg: 250 } },
@@ -32,29 +36,24 @@ const columns = [
   { label: 'Action', dataKey: 'action', width: { sm: 50, md: 70, lg: 90 } },
 ];
 
+
+
 const rows = Array.from({ length: 200 }, (_, index) => {
   const randomSelection = sample[Math.floor(Math.random() * sample.length)];
   return { id: index, ...randomSelection };
 });
 
+
 function fixedHeaderContent() {
   return (
-    <TableRow >
+    <TableRow>
       {columns.map((column) => (
         <TableCell
           key={column.dataKey}
-          variant="head"
           align={column.numeric ? 'right' : 'left'}
-          style={{ width: column.width }}
           sx={{
-            display: {
-              xs: 'none', 
-              sm: 'none', 
-              md: 'none', 
-              lg: 'table-cell', 
-              xl: 'table-cell', 
-            },
-            backgroundColor: 'background.paper',
+            width: { xs: column.width.sm, sm: column.width.sm, md: column.width.md, lg: column.width.lg },
+            display: { xs: 'none',md:'table-cell',sm:"table-cell" ,lg: 'table-cell' },
           }}
         >
           {column.label}
@@ -64,14 +63,12 @@ function fixedHeaderContent() {
   );
 }
 
+
 function rowContent(_index, row) {
   return (
     <>
       {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          align={column.numeric ? 'right' : 'left'}
-        >
+        <TableCell key={column.dataKey} align={column.numeric ? 'right' : 'left'}>
           {column.dataKey === 'status' ? (
             <Button
               variant="contained"
@@ -91,22 +88,22 @@ function rowContent(_index, row) {
   );
 }
 
+
 function MobileOnlyView({ page, rowsPerPage, handleChangePage }) {
   const isMobile = useMediaQuery('(max-width:600px)');
   const [searchTerm, setSearchTerm] = React.useState('');
-  
-  const filteredRows = rows.filter(row => 
+
+
+  const filteredRows = rows.filter(row =>
     row.courseName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+ 
   const paginatedRows = filteredRows.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
   return (
-    <Paper style={{ width: '100%', backgroundColor: 'white' }}>
-      <Box 
-        padding={isMobile ? 1 : 2} 
-        sx={{ mx:1 }}
-      >
+    <Paper style={{ width: '100%', backgroundColor: 'transparent', }}>
+      <Box padding={isMobile ? 1 : 2} sx={{ mx: 1 }}>
         <TextField
           fullWidth
           variant="outlined"
@@ -115,15 +112,15 @@ function MobileOnlyView({ page, rowsPerPage, handleChangePage }) {
           onChange={(e) => setSearchTerm(e.target.value)}
           sx={{
             '& .MuiInputBase-root': {
-              height: isMobile ? '32px' : '48px', 
-              fontSize: isMobile ? '12px' : '18px', 
-              width: '90%', 
-              marginLeft: '8px', 
-              marginRight: '8px', 
+              height: isMobile ? '32px' : '48px',
+              fontSize: isMobile ? '12px' : '18px',
+              width: '99%',
+             
             },
           }}
         />
       </Box>
+
       {paginatedRows.map((row, index) => (
         <Box
           key={index}
@@ -131,13 +128,13 @@ function MobileOnlyView({ page, rowsPerPage, handleChangePage }) {
             padding: isMobile ? '8px' : '16px',
             marginTop: isMobile ? '8px' : '16px',
             marginBottom: isMobile ? '8px' : '16px',
-            marginLeft: '8px', 
-            marginRight: '8px', 
+            marginLeft: '8px',
+            marginRight: '8px',
             borderBottom: '1px solid #e0e0e0',
             display: 'flex',
             flexDirection: 'column',
             gap: '4px',
-            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)', 
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
             borderRadius: '8px',
             backgroundColor: 'white',
           }}
@@ -172,12 +169,13 @@ function MobileOnlyView({ page, rowsPerPage, handleChangePage }) {
           </Box>
         </Box>
       ))}
+
       <Box display="flex" justifyContent="center" padding={isMobile ? 1 : 2}>
         <Stack spacing={2}>
           <Pagination
             count={Math.ceil(filteredRows.length / rowsPerPage)}
             page={page}
-            onChange={handleChangePage}
+            onChange={(e, value) => handleChangePage(value)}
           />
         </Stack>
       </Box>
@@ -185,12 +183,14 @@ function MobileOnlyView({ page, rowsPerPage, handleChangePage }) {
   );
 }
 
+
 export default function ResponsiveTable() {
   const isMobile = useMediaQuery('(max-width:600px)');
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 10;
 
-  const handleChangePage = ( value) => {
+
+  const handleChangePage = (value) => {
     setPage(value);
   };
 
@@ -218,12 +218,13 @@ export default function ResponsiveTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Box display="flex" justifyContent="flex-end" padding={2}>
+   
+      <Box display="flex" justifyContent="center" padding={2}>
         <Stack spacing={2}>
           <Pagination
             count={Math.ceil(rows.length / rowsPerPage)}
             page={page}
-            onChange={handleChangePage}
+            onChange={(e, value) => handleChangePage(value)}
           />
         </Stack>
       </Box>

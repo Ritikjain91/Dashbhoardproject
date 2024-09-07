@@ -3,7 +3,6 @@ import { Box, Container, CssBaseline } from '@mui/material';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import NavBar from '../NavBar/NavBar';
-import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import MyCourse from '../MyCourse/MyCourse';
 
@@ -12,7 +11,10 @@ function RootLayout() {
   const isHomePage = location.pathname === '/';
 
   return (
-    <Container disableGutters maxWidth="lg">
+    <Container disableGutters maxWidth="lg" sx={{
+      px: { xs: 2, sm: 3, md: 4 },  
+      width: { xs: '100%', sm: '100%', md: '90%', lg: '100%' },
+    }}>
       <CssBaseline />
 
       <Box display="flex" flexDirection="column" minHeight="100vh">
@@ -31,7 +33,6 @@ function RootLayout() {
           </Container>
         </Box>
 
-        {/* <Footer /> */}
       </Box>
     </Container>
   );

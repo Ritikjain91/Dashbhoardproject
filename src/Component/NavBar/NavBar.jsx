@@ -17,18 +17,21 @@ function NavBar() {
         color: 'black', 
         borderRadius: '10px',
         my: {
-          lg: '4px',
-          sm: '1px', 
+          lg: '10px',
+          md: '10px',
+
+          sm: '10px', 
+          xs:'1px'
         },
         
-        boxShadow: { xs: 'none', lg: '0px 4px 12px rgba(0, 0, 0, 0.3)' }  
+        boxShadow: { xs: 'none', lg: '0px 4px 12px rgba(0, 0, 0, 0.3)',md: '0px 4px 12px rgba(0, 0, 0, 0.3)',sm: '0px 4px 12px rgba(0, 0, 0, 0.3)' }  
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ borderRadius: '10px' }}>
           
        
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'start' }}>
+          <Box sx={{ flexGrow: 1, display: 'flex',justifyContent: { xl: 'flex-start',lg:'flex-start', md: 'center', sm: 'center', xs: 'center' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
