@@ -21,7 +21,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
 
 const StyledImage1 = styled('img')(({ theme }) => ({
   position: 'absolute',
-  right: theme.spacing(2.5),
+  right: theme.spacing(-0.85),
   top: theme.spacing(0.25),
   height: '160px',
   maxWidth: '100%',
@@ -43,7 +43,7 @@ const Header = () => {
     <HeaderContainer sx={{ mt: 3, mx: { lg: 0, md: 0, sm: 0, xs: 2 } }}>
       <Grid container direction="row" alignItems="center" justifyContent="space-between">
         <Grid item>
-          <Box sx={{ ml: matches ? 4 : 15 }}>
+          <Box sx={{ ml: matches ? 4 : 8 }}>
             <Box>
               <Typography
                 variant="body2"
@@ -51,7 +51,7 @@ const Header = () => {
                   mb: matches ? "4vh" : 15,
                   color: 'black',
                   fontWeight: 500,
-                  fontSize: matches ? '0.75rem' : '1rem',
+                  fontSize: matches ? '0.85rem' : '1rem',
                 }}
               >
                 September 4, 2024
@@ -61,7 +61,7 @@ const Header = () => {
               <Typography
                 variant={matches ? 'h6' : 'h4'}
                 sx={{
-                  fontSize: matches ? '1.5rem' : '2rem',
+                  fontSize: matches ? '1.3rem' : '2rem',
                 }}
               >
                 Welcome back, <Box component="span" sx={{ color: theme.palette.primary.main, fontWeight: 500 }}>Jose Herman!</Box>

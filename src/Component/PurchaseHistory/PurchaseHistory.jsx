@@ -224,7 +224,11 @@ export default function ResponsiveTable() {
             '& .MuiInputBase-root': {
               height: isMobile ? '32px' : '48px',
               fontSize: isMobile ? '12px' : '18px',
-              width: '99%',
+              width: '97%',
+              mx:2,
+              my:2.5
+
+
             
             },
           }}
