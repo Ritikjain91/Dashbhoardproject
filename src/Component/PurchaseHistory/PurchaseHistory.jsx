@@ -186,7 +186,7 @@ export default function ResponsiveTable() {
   const [searchTerm, setSearchTerm] = React.useState(''); 
   const [filteredRows, setFilteredRows] = React.useState(rows); 
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = ( newPage) => {
     setPage(newPage);
   };
 
@@ -205,35 +205,36 @@ export default function ResponsiveTable() {
   return (
     <React.Fragment>
     
-      <Box sx={{ display: {
-    xl: 'none',
-    lg: 'none',
-    md: 'none',
-    sm: 'flex',
-  }, justifyContent: 'center' }}>
-        <TextField
-     
-        
-        fullWidth
-        variant="outlined"
-        placeholder="Search Courses"
-   
-          value={searchTerm}
-          onChange={handleSearch}
-          sx={{
-            '& .MuiInputBase-root': {
-              height: isMobile ? '32px' : '48px',
-              fontSize: isMobile ? '12px' : '18px',
-              width: '97%',
-              mx:2,
-              my:2.5
+    <Box
+  sx={{
+    display: {
+      xl: 'none',
+      lg: 'none',
+      md: 'none', 
+      sm: 'none',
+      xs:'none'
+    },
+    justifyContent: 'center',
+  }}
+>
+  <TextField
+    fullWidth
+    variant="outlined"
+    placeholder="Search Courses"
+    value={searchTerm}
+    onChange={handleSearch}
+    sx={{
+      '& .MuiInputBase-root': {
+        height: isMobile ? '32px' : '48px',
+        fontSize: isMobile ? '12px' : '18px',
+        width: '97%',
+        mx: 2,
+        my: 2.5,
+      },
+    }}
+  />
+</Box>
 
-
-            
-            },
-          }}
-        />
-      </Box>
 
       {isMobile ? (
         <MobileOnlyView paginatedRows={paginatedRows} page={page} handleChangePage={handleChangePage} />

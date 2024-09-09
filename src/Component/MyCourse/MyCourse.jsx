@@ -3,7 +3,15 @@ import { Grid, Card, CardContent, CardMedia, Typography, LinearProgress, Box, Pa
 
 const CourseCard = ({ title, instructors, progress }) => {
   return (
-    <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3 }}>
+    <Card sx={{ 
+      maxWidth: 345, 
+      borderRadius: 2, 
+      boxShadow: 3, // Add background shadow
+      backgroundColor: 'white', 
+      '&:hover': { 
+        boxShadow: 6 // Optional: darker shadow on hover
+      }
+    }}>
       <CardMedia
         component="img"
         height="140"
@@ -77,13 +85,70 @@ const App = () => {
       title: "Complete Digital Marketing Course: Zero to One",
       instructors: "John Doe, Angela Yu",
       progress: 65,
+    }, {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
     },
     {
       title: "Complete Digital Marketing Course: Zero to One",
       instructors: "John Doe, Angela Yu",
       progress: 65,
     },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+    {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    }, {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    }, {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    }, {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    }, {
+      title: "Complete Digital Marketing Course: Zero to One",
+      instructors: "John Doe, Angela Yu",
+      progress: 65,
+    },
+   
   ];
+
 
   const count = Math.ceil(courses.length / itemsPerPage);
   const paginatedCourses = courses.slice((page - 1) * itemsPerPage, page * itemsPerPage);
@@ -102,16 +167,20 @@ const App = () => {
         minHeight: '100vh',
         textAlign: 'center',
         padding: 0,
+        backgroundColor: 'white',  
+       
+
       }}
     >
-      <Grid container spacing={3} justifyContent="center" alignItems="center">
+      <Grid container spacing={3} justifyContent="center" alignItems="center" sx={{ borderBottom: '1px solid #D3D3D3', pb: 5 }}
+ >
         {paginatedCourses.map((course, index) => (
           <Grid
             item
-            xs={12}          // 1 column for mobile screens
-            sm={6}           // 2 columns for small screens
-            md={6}           // 2 columns for tablet screens (md)
-            lg={3}           // 4 columns for large screens
+            xs={12}         
+            sm={6}           
+            md={6}          
+            lg={3}         
             key={index}
             sx={{ display: 'flex', justifyContent: 'center' }}
           >
@@ -123,7 +192,7 @@ const App = () => {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ my: 5, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ my: 5, display: 'flex', justifyContent: 'center', backgroundColor: 'white', padding: 2 }}>
         <Stack spacing={2}>
           <Pagination count={count} page={page} onChange={handleChange} />
         </Stack>
