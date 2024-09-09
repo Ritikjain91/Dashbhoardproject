@@ -212,7 +212,7 @@ export default function ResponsiveTable() {
       lg: 'none',
       md: 'none', 
       sm: 'none',
-      xs:'none'
+      xs:'flex'
     },
     justifyContent: 'center',
   }}
